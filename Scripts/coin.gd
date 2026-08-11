@@ -1,6 +1,6 @@
 extends Area2D
 
-@onready var game_manager: Node = %GameManager
+@onready var game_manager: Node = get_tree().current_scene.get_node("GameManager")
 @onready var coin: Area2D = $"."
 @onready var timer: Timer = $Timer
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D

@@ -11,6 +11,7 @@ var alive = true
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape_2d: CollisionShape2D = $killzone/CollisionShape2D
 @onready var area_2d: Area2D = $Area2D
+@export var coin_scene: PackedScene
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -27,8 +28,17 @@ func _process(delta: float) -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
 		body.velocity.y = -200
+
+		alive = false
+		collision_shape_2d.set_deferred("disabled", true)
+		area_2d.set_deferred("monitoring", false)
+		animated_sprite.play("death")
+		
+		if randi_range(1, 3) == 1:
+			call_deferred("drop_coin")
 	
-	alive = false
-	collision_shape_2d.queue_free()
-	animated_sprite.play("death")
-	area_2d.queue_free()
+func drop_coin() -> void:
+	var coin = coin_scene.instantiate()
+	get_parent().add_child(coin)
+	coin.global_position = global_position
+	coin.global_position.y -= 10
