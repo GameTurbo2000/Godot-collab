@@ -4,6 +4,38 @@
 [ext_resource type="Texture2D" uid="uid://dsgayrp6nkle1" path="res://Assets/brackeys_platformer_assets/brackeys_platformer_assets/sprites/slime_green.png" id="1_hghv2"]
 [ext_resource type="PackedScene" uid="uid://qbsgpb07djj" path="res://Scenes/killzone.tscn" id="2_1f0kj"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ghaa6"]
+atlas = ExtResource("1_hghv2")
+region = Rect2(0, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1dp5w"]
+atlas = ExtResource("1_hghv2")
+region = Rect2(24, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_auwsv"]
+atlas = ExtResource("1_hghv2")
+region = Rect2(48, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8uf12"]
+atlas = ExtResource("1_hghv2")
+region = Rect2(72, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_po0sg"]
+atlas = ExtResource("1_hghv2")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_haro7"]
+atlas = ExtResource("1_hghv2")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56vhr"]
+atlas = ExtResource("1_hghv2")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ta2yt"]
+atlas = ExtResource("1_hghv2")
+region = Rect2(0, 0, 24, 24)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_1f0kj"]
 atlas = ExtResource("1_hghv2")
 region = Rect2(0, 24, 24, 24)
@@ -22,6 +54,35 @@ region = Rect2(72, 24, 24, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mfy08"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ghaa6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1dp5w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_auwsv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8uf12")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_po0sg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_haro7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56vhr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ta2yt")
+}],
+"loop": 0,
+"name": &"death",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1f0kj")
@@ -43,14 +104,17 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mfy08"]
 size = Vector2(8.5, 10)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_478iw"]
+size = Vector2(10, 2)
+
 [node name="enemy" type="Node2D" unique_id=931584868]
 script = ExtResource("1_afpow")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=396795469]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_mfy08")
+animation = &"death"
 autoplay = "default"
-frame_progress = 0.37514526
 
 [node name="killzone" parent="." unique_id=2109115754 instance=ExtResource("2_1f0kj")]
 
@@ -65,3 +129,12 @@ target_position = Vector2(9, 0)
 [node name="RayCastLeft" type="RayCast2D" parent="." unique_id=1993355401]
 position = Vector2(0, -5)
 target_position = Vector2(-9, 0)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=888957042]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2083764948]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_478iw")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
