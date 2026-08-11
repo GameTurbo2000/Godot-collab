@@ -110,4 +110,11 @@ autoplay = "default"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1704974659]
 shape = SubResource("CircleShape2D_mfy08")
 
+[node name="Timer" type="Timer" parent="." unique_id=1071516071]
+
+[node name="Fade_timer" type="Timer" parent="." unique_id=746018540]
+wait_time = 0.1
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Fade_timer" to="." method="_on_fade_timer_timeout"]
