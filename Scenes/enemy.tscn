@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dskhnaa060rmm" path="res://Scripts/enemy.gd" id="1_afpow"]
 [ext_resource type="Texture2D" uid="uid://dsgayrp6nkle1" path="res://Assets/brackeys_platformer_assets/brackeys_platformer_assets/sprites/slime_green.png" id="1_hghv2"]
 [ext_resource type="PackedScene" uid="uid://qbsgpb07djj" path="res://Scenes/killzone.tscn" id="2_1f0kj"]
+[ext_resource type="PackedScene" uid="uid://b1kyqw8dqvauq" path="res://Scenes/coin.tscn" id="2_287tu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ghaa6"]
 atlas = ExtResource("1_hghv2")
@@ -109,6 +110,7 @@ size = Vector2(10, 2)
 
 [node name="enemy" type="Node2D" unique_id=931584868]
 script = ExtResource("1_afpow")
+coin_scene = ExtResource("2_287tu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=396795469]
 position = Vector2(0, -12)
